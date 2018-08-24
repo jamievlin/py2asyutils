@@ -1,0 +1,30 @@
+{
+    "options": {
+        "directed": true,
+        "circrad": 0.1,
+        "arrowstyle": null, 
+        "fillbackground": "white", 
+        "header": "unitsize(2cm);\n"
+    }, 
+
+    "graph": [
+        {
+            "id": 0, 
+            "text": "a",
+            "pos": [0, 0],
+            "outnodes": [1, 2]
+        },
+        {
+            "id": 1, 
+            "text": "b",
+            "pos": [1, 1],
+            "outnodes": []
+        }, 
+        {
+            "id": 2,
+            "text": "c", 
+            "pos": [0, 1], 
+            "outnodes": [0]
+        }
+    ]
+}
