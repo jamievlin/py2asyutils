@@ -79,7 +79,7 @@ def main(args):
         print('')
 
 def ordtuple(tup: tuple):
-    return (min(tup), max(tup));
+    return (min(tup), max(tup))
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv) or 0)

@@ -13,10 +13,3 @@ def func2asy(funcname: str, func: t.Callable[[float], float], from_a: float=0.0,
 
 def arr2asyarr(arr, typ: str='real'):
     return 'new {1:s}[] {{{0:s}}}'.format(','.join([str(val) for val in arr]), typ)
-
-
-def test():
-    print(func2asy('xsin', lambda x: np.sin(np.pi * x)))
-
-if __name__ == '__main__':
-    test()
