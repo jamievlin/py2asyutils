@@ -30,7 +30,7 @@ def main(args):
     print('')
     print('// options')
     print('real circrad=', graphobj['options']['circrad'],';')
-    print('pen filloptpen=', graphobj['options']['fillbackground'], ';')
+    # print('pen filloptpen=', graphobj['options']['fillbackground'], ';')
 
     arrowstyle = graphobj['options']['arrowstyle']
 
@@ -74,7 +74,8 @@ def main(args):
     for nodes in graphobj['graph']:
         postuple = str(tuple(nodes['pos']))
         print('// processing node id {0}'.format(nodes['id']))
-        print('filldraw(circle({0},circrad),fillpen=filloptpen);'.format(postuple))
+        print('unfill(circle({0},circrad));'.format(postuple))
+        print('draw(circle({0},circrad));'.format(postuple))
         print('label("{0}", {1});'.format(nodes['text'], postuple))
         print('')
 

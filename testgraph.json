@@ -3,7 +3,6 @@
         "directed": true,
         "circrad": 0.1,
         "arrowstyle": null, 
-        "fillbackground": "white", 
         "header": "unitsize(2cm);\n"
     }, 
 
