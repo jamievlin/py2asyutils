@@ -37,7 +37,13 @@ def main(args):
     for nodes in graphobj['graph']:
         nodespos[nodes['id']] = nodes['pos']
         for outnodes in nodes['outnodes']:
-            edgeslist.append((nodes['id'], outnodes))
+            node_id = outnodes
+            if isinstance(outnodes, dict):
+                label_data = {'label': outnodes['label'], 'align':outnodes['align']}
+                node_id = outnodes['id']
+            else:
+                label_data = None
+            edgeslist.append((nodes['id'], node_id, label_data))
 
     print('// edges')
 
@@ -45,24 +51,37 @@ def main(args):
     # edges
     for edge in edgeslist:
         print('// processing edge {0}'.format(edge))
+
         if ordtuple(edge) not in definededges:
-            print('path edge_{0}={1}--{2};'.format(edgecount, tuple(nodespos[edge[0]]), tuple(nodespos[edge[1]])))
+            edgecount += 1
+            edge_name = 'edge_{0}'.format(edgecount)
+            print('path {0}={1}--{2};'.format(edge_name,
+                                              tuple(nodespos[edge[0]]), tuple(nodespos[edge[1]])))
             curredge = edgecount
             definededges[ordtuple(edge)] = edgecount
-            edgecount += 1
+
             reversedEdge = False
+
         else:
+            edge_name = 'edge_{0}'.format(edgecount)
             curredge = definededges[ordtuple(edge)]
             reversedEdge = True
 
+        
+
         if graphobj['options']['directed']:
-            lineProp = '1.0 - circrad/arclength(edge_{0})'.format(curredge)
-            print('draw({2}(edge_{0}),arrow=Arrow({3}Relative({1})));'.format(curredge, lineProp,
+            lineProp = '1.0 - circrad/arclength({0})'.format(edge_name)
+            print('draw({2}({0}),arrow=Arrow({3}Relative({1})));'.format(edge_name, lineProp,
                                                                          'reverse' if reversedEdge else '',
                                                                                arrowstyle + ',' if arrowstyle is not None else ''))
+            if edge[2]:
+                print('label("{1}",{0},align={2});'.format(edge_name, edge[2]['label'], edge[2]['align']))
         else:
             if ordtuple(edge) not in drawnedges:
-                print('draw(edge_{0});'.format(curredge))
+                print('draw({0});'.format(edge_name))
+
+                if edge[2]:
+                    print('label("{1}",path={0},align={2});'.format(edge_name, edge[2]['label'], edge[2]['align']))
                 drawnedges.add(ordtuple(edge))
 
         print('')
@@ -80,6 +99,7 @@ def main(args):
         print('')
 
 def ordtuple(tup: tuple):
+    tup = tuple([val for val in tup if isinstance(val,int)])
     return (min(tup), max(tup))
 
 if __name__ == '__main__':

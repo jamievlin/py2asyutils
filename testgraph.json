@@ -3,7 +3,7 @@
         "directed": true,
         "circrad": 0.1,
         "arrowstyle": null, 
-        "header": "unitsize(2cm);\n"
+        "header": "unitsize(4cm);\n"
     }, 
 
     "graph": [
@@ -23,7 +23,13 @@
             "id": 2,
             "text": "c", 
             "pos": [0, 1], 
-            "outnodes": [0]
+            "outnodes": [
+                {
+                    "id":0,
+                    "label":"$123$",
+                    "align":"E"
+                }
+            ]
         }
     ]
 }
