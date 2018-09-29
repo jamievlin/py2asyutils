@@ -1,5 +1,5 @@
 {
-   "definitions": {},
+  "definitions": {},
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://example.com/root.json",
   "type": "object",
@@ -14,10 +14,19 @@
       "type": "object",
       "title": "The Options Schema",
       "required": [
-        "directed",
-        "circrad"
+        "circrad",
+        "directed"
       ],
       "properties": {
+        "circrad": {
+          "$id": "#/properties/options/properties/circrad",
+          "type": "number",
+          "title": "The Circrad Schema",
+          "default": 0.0,
+          "examples": [
+            0.15
+          ]
+        },
         "directed": {
           "$id": "#/properties/options/properties/directed",
           "type": "boolean",
@@ -27,36 +36,24 @@
             true
           ]
         },
-        "circrad": {
-          "$id": "#/properties/options/properties/circrad",
-          "type": "number",
-          "title": "The Circrad Schema",
-          "default": 0.0,
-          "examples": [
-            0.1
-          ]
-        },
-        "arrowstyle": {
-          "$id": "#/properties/options/properties/arrowstyle",
-          "type": "null",
-          "title": "Arrow Style of Graph",
-          "description": "",
-          "default": null,
-          "examples": [
-            "TeXHead"
-          ],
-          "readOnly": false,
-          "writeOnly": false
-        },
         "header": {
           "$id": "#/properties/options/properties/header",
           "type": "string",
           "title": "The Header Schema",
           "default": "",
           "examples": [
-            "unitsize(2cm);\n"
+            "size(6cm);"
           ],
           "pattern": "^(.*)$"
+        },
+        "arrowstyle": {
+          "$id": "#/properties/options/properties/arrowstyle",
+          "type": "null",
+          "title": "The Arrowstyle Schema",
+          "default": null,
+          "examples": [
+            null
+          ]
         }
       }
     },
@@ -71,8 +68,8 @@
         "required": [
           "id",
           "text",
-          "pos",
-          "outnodes"
+          "outnodes",
+          "pos"
         ],
         "properties": {
           "id": {
@@ -90,9 +87,61 @@
             "title": "The Text Schema",
             "default": "",
             "examples": [
-              "a"
+              "s"
             ],
             "pattern": "^(.*)$"
+          },
+          "outnodes": {
+            "$id": "#/properties/graph/items/properties/outnodes",
+            "type": "array",
+            "title": "The Outnodes Schema",
+            "default": null,
+            "uniqueItems": true,
+            "items": {
+              "$id": "#/properties/graph/items/properties/outnodes/items",
+              "type": [
+                "object",
+                "integer"
+              ],
+              "title": "The Items Schema",
+              "default": null,
+              "required": [
+                "id",
+                "label",
+                "align"
+              ],
+              "properties": {
+                "id": {
+                  "$id": "#/properties/graph/items/properties/outnodes/items/properties/id",
+                  "type": "integer",
+                  "title": "The Id Schema",
+                  "default": 0,
+                  "examples": [
+                    1
+                  ]
+                },
+                "label": {
+                  "$id": "#/properties/graph/items/properties/outnodes/items/properties/label",
+                  "type": "string",
+                  "title": "The Label Schema",
+                  "default": "",
+                  "examples": [
+                    "$4$"
+                  ],
+                  "pattern": ""
+                },
+                "align": {
+                  "$id": "#/properties/graph/items/properties/outnodes/items/properties/align",
+                  "type": "string",
+                  "title": "The Align Schema",
+                  "default": "",
+                  "examples": [
+                    "N"
+                  ],
+                  "pattern": ""
+                }
+              }
+            }
           },
           "pos": {
             "$id": "#/properties/graph/items/properties/pos",
@@ -103,29 +152,12 @@
             "minItems": 2,
             "items": {
               "$id": "#/properties/graph/items/properties/pos/items",
-              "type": "integer",
+              "type": "number",
               "title": "The Items Schema",
               "default": 0,
               "examples": [
                 0,
                 0
-              ]
-            }
-          },
-          "outnodes": {
-            "$id": "#/properties/graph/items/properties/outnodes",
-            "type": "array",
-            "title": "The Outnodes Schema",
-            "default": null,
-            "uniqueItems": true,
-            "items": {
-              "$id": "#/properties/graph/items/properties/outnodes/items",
-              "type": "integer",
-              "title": "The Items Schema",
-              "default": 0,
-              "examples": [
-                1,
-                2
               ]
             }
           }
@@ -134,5 +166,4 @@
     }
   }
 }
-
 
